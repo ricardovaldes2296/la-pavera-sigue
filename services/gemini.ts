@@ -32,34 +32,106 @@ const getFallbackMenu = (): MenuResponse => {
             {
                 name: "Manzana Mágica",
                 description: "Bourbon con sidra de manzana y un toque de canela.",
-                ingredients: ["Bourbon", "Sidra de Manzana", "Canela", "Jugo de Limón"],
-                instructions: "Mezclar ingredientes con hielo.",
+                ingredients: [
+                    "2 oz Bourbon", 
+                    "4 oz Sidra de Manzana (Apple Cider)", 
+                    "0.5 oz Jugo de Limón", 
+                    "Pizca de Canela"
+                ],
+                instructions: "1. Llenar vaso con hielo. 2. Agregar Bourbon y jugo de limón. 3. Rellenar con Sidra. 4. Espolvorear canela y mezclar suavemente.",
                 type: DrinkType.COCKTAIL,
                 emoji: "🍎"
             },
             {
                 name: "Cranberry Embrujado",
                 description: "Vodka con jugo de cranberry y lima refrescante.",
-                ingredients: ["Vodka", "Jugo de Cranberry", "Lima", "Agua con Gas"],
-                instructions: "Mezclar y servir con hielo.",
+                ingredients: [
+                    "2 oz Vodka", 
+                    "3 oz Jugo de Cranberry", 
+                    "0.5 oz Jugo de Lima Fresco", 
+                    "Top de Agua con Gas (Club Soda)"
+                ],
+                instructions: "1. Llenar vaso alto con hielo. 2. Agregar Vodka, Cranberry y Lima. 3. Rellenar con agua con gas. 4. Decorar con rodaja de lima.",
                 type: DrinkType.COCKTAIL,
                 emoji: "🍒"
             },
             {
                 name: "Margarita Picante",
                 description: "Tequila con lima fresca y un toque de jalapeño.",
-                ingredients: ["Tequila", "Jugo de Lima", "Jarabe Simple", "Rodajas de Jalapeño"],
-                instructions: "Agitar con hielo y servir con borde de sal.",
+                ingredients: [
+                    "2 oz Tequila Blanco", 
+                    "1 oz Jugo de Lima Fresco", 
+                    "0.75 oz Jarabe Simple (Agave)", 
+                    "2-3 Rodajas de Jalapeño fresco"
+                ],
+                instructions: "1. Macerar suavemente 1 rodaja de jalapeño en el shaker. 2. Agregar hielo, Tequila, Lima y Jarabe. 3. Agitar vigorosamente. 4. Colar sobre hielo nuevo en vaso con borde de sal.",
                 type: DrinkType.COCKTAIL,
                 emoji: "🌶️"
             },
             {
                 name: "Tequila Maple",
                 description: "Tequila reposado con notas de maple y naranja.",
-                ingredients: ["Tequila", "Sirope de Maple", "Jugo de Naranja", "Amargo de Angostura"],
-                instructions: "Mezclar suavemente.",
+                ingredients: [
+                    "2 oz Tequila Reposado", 
+                    "0.5 oz Sirope de Maple", 
+                    "2 toques de Amargo de Angostura", 
+                    "Cascara de Naranja (Garnish)"
+                ],
+                instructions: "1. En un vaso corto con hielo grande, agregar Tequila, Maple y Amargos. 2. Remover con cuchara por 20 segundos hasta enfriar. 3. Exprimir aceites de la cáscara de naranja encima.",
                 type: DrinkType.COCKTAIL,
                 emoji: "🍁"
+            },
+            // Mocktails
+            {
+                name: "Sidra Espumosa (Sin Alcohol)",
+                description: "Refrescante mezcla de manzana y jengibre.",
+                ingredients: [
+                    "4 oz Sidra de Manzana", 
+                    "2 oz Ginger Beer", 
+                    "Rodaja de Manzana"
+                ],
+                instructions: "1. Servir hielo en vaso alto. 2. Agregar Sidra y Ginger Beer. 3. Mezclar suavemente.",
+                type: DrinkType.MOCKTAIL,
+                emoji: "🍏"
+            },
+            {
+                name: "Cranberry Fizz (Sin Alcohol)",
+                description: "Burbujeante y festivo con romero.",
+                ingredients: [
+                    "3 oz Jugo de Cranberry", 
+                    "3 oz Sprite o 7-Up", 
+                    "Ramita de Romero",
+                    "Chorro de Lima"
+                ],
+                instructions: "1. Llenar vaso con hielo. 2. Servir jugo y refresco. 3. Exprimir lima y decorar con romero.",
+                type: DrinkType.MOCKTAIL,
+                emoji: "🌿"
+            },
+            {
+                name: "Mula de Otoño (Sin Alcohol)",
+                description: "Versión sin alcohol del Moscow Mule con sabor a otoño.",
+                ingredients: [
+                    "4 oz Ginger Beer", 
+                    "1 oz Jugo de Pera (o Néctar)", 
+                    "0.5 oz Jugo de Lima",
+                    "Canela en rama"
+                ],
+                instructions: "1. Llenar taza de cobre o vaso con hielo. 2. Agregar ingredientes y mezclar. 3. Decorar con canela.",
+                type: DrinkType.MOCKTAIL,
+                emoji: "🍐"
+            },
+            {
+                name: "Naranja Maple (Sin Alcohol)",
+                description: "Cítrico dulce y sofisticado.",
+                ingredients: [
+                    "3 oz Jugo de Naranja Recién Exprimido", 
+                    "0.5 oz Sirope de Maple", 
+                    "Top de Agua con Gas",
+                    "Cereza Maraschino"
+                ],
+                instructions: "1. Agitar jugo y maple con hielo en shaker para enfriar. 2. Servir en copa y rellenar con agua con gas.",
+                type: DrinkType.MOCKTAIL,
+                emoji: "🍊"
             }
         ]
     };
@@ -81,21 +153,23 @@ export const generateFallMenu = async (): Promise<MenuResponse> => {
     
     IMPORTANT INGREDIENT RULES: 
     1. Use ONLY simple, easy-to-find ingredients available at a standard supermarket. 
-    2. DO NOT include hard-to-find purees, specialized syrups, or obscure liqueurs.
+    2. **CRITICAL:** INGREDIENTS MUST HAVE SPECIFIC MEASUREMENTS (e.g., "2 oz", "1/2 oz", "Top with"). Do not list just the name.
     3. ABSOLUTELY NO PUMPKIN (CALABAZA) or PUMPKIN PUREE.
 
     I need exactly 4 Cocktails (alcohol) with the following specific requirements:
-    1. Bourbon Cocktail: Must be named "Manzana Mágica" (Apple Cider/Cinnamon flavor profile).
-    2. Vodka Cocktail: Must be named "Cranberry Embrujado" (Cranberry flavor profile).
-    3. Tequila Cocktail: Traditional Spicy Margarita (Jalapeño/Lime profile). Name it "Margarita Picante".
-    4. Tequila Cocktail: Fall themed (e.g. Maple, Apple, or Cinnamon).
+    1. Bourbon Cocktail: Named "Manzana Mágica". Ingredients: Bourbon, Apple Cider, Lemon, Cinnamon.
+    2. Vodka Cocktail: Named "Cranberry Embrujado". Ingredients: Vodka, Cranberry Juice, Lime, Soda.
+    3. Tequila Cocktail: Named "Margarita Picante". Traditional Spicy Margarita (Tequila, Lime, Agave, Jalapeño).
+    4. Tequila Cocktail: Fall themed (e.g. Maple Old Fashioned style).
     
     I need exactly 4 Mocktails (non-alcoholic) with fall themes using simple ingredients.
     IMPORTANT MOCKTAIL RULES:
     1. Ingredients must be ready-to-use from a supermarket (e.g., Ginger Beer, Apple Cider, Sparkling Water, Cranberry Juice, Orange Juice, Sprite/7-Up).
     2. NO preparation required (no muddling, no homemade syrups, no cooking).
     3. Use simple sweeteners like Maple Syrup or Honey if needed.
-    4. Simple garnishes only (Cinnamon stick, Apple slice, Orange slice).
+    
+    **INSTRUCTIONS REQUIREMENT:**
+    The instructions must be practical, step-by-step for a bartender. Example: "1. Add ice. 2. Pour 2oz Vodka. 3. Shake."
     
     The descriptions should be elegant and sophisticated.
     Assign a relevant emoji to each drink.
@@ -117,8 +191,8 @@ export const generateFallMenu = async (): Promise<MenuResponse> => {
                 properties: {
                   name: { type: Type.STRING },
                   description: { type: Type.STRING, description: "Short, elegant description in Spanish" },
-                  ingredients: { type: Type.ARRAY, items: { type: Type.STRING } },
-                  instructions: { type: Type.STRING, description: "Brief mixing instructions for the bartender" },
+                  ingredients: { type: Type.ARRAY, items: { type: Type.STRING }, description: "List of ingredients WITH AMOUNTS (e.g., '2 oz Bourbon')" },
+                  instructions: { type: Type.STRING, description: "Numbered step-by-step mixing instructions for the bartender." },
                   type: { type: Type.STRING, enum: ["Cocktail", "Mocktail"] },
                   emoji: { type: Type.STRING }
                 },
