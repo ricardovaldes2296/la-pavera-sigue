@@ -1,17 +1,31 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Drink, MenuResponse, ShoppingListResponse, DrinkType } from "../types";
 
-const apiKey = process.env.API_KEY || "";
+// Robust API Key extraction for both Vite (replacement) and Browser (polyfill)
+const getApiKey = () => {
+  try {
+    // In Vite/Netlify, this string literal is replaced at build time
+    return process.env.API_KEY;
+  } catch (e) {
+    // In browser previews without build steps, process is undefined
+    // We rely on the window.process polyfill defined in index.html
+    return (window as any).process?.env?.API_KEY;
+  }
+};
+
+const apiKey = getApiKey() || "";
 const ai = new GoogleGenAI({ apiKey });
 
 const modelName = "gemini-2.5-flash";
 
+// Helper to enforce vocabulary rules
 const enforceVocabulary = (text: string): string => {
   return text
     .replace(/ar[aá]ndano/gi, "Cranberry")
     .replace(/arce/gi, "Maple");
 };
 
+// Define fallback FIRST to avoid ReferenceError
 const getFallbackMenu = (): MenuResponse => {
     return {
         drinks: [
@@ -52,6 +66,7 @@ const getFallbackMenu = (): MenuResponse => {
 };
 
 export const generateFallMenu = async (): Promise<MenuResponse> => {
+  // Prevent API call if key is missing
   if (!apiKey) {
       console.warn("API Key is missing. Using fallback menu.");
       return getFallbackMenu();
@@ -120,6 +135,7 @@ export const generateFallMenu = async (): Promise<MenuResponse> => {
     
     const parsed = JSON.parse(text) as MenuResponse;
     
+    // Post-process to ensure vocabulary rules
     parsed.drinks = parsed.drinks.map(d => ({
       ...d,
       name: enforceVocabulary(d.name),
