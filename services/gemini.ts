@@ -11,10 +11,9 @@ const getApiKey = () => {
       return (window as any).process.env.API_KEY;
     }
     // Fallback to standard process (Vite replace)
-    try {
-        if (process.env.API_KEY) return process.env.API_KEY;
-    } catch (e) {
-        // ignore
+    // We use typeof check to prevent ReferenceError if process is not defined
+    if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+        return process.env.API_KEY;
     }
   } catch (e) {
     console.warn("Could not read environment variable safely.");
