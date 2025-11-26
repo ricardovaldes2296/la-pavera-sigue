@@ -6,10 +6,14 @@
     <title>La Pavera Sigue</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 1. Safety Polyfill: Must run before anything else -->
     <script>
-      // SAFETY POLYFILL: Prevents "process is not defined" crashes in browser environments
       window.process = { env: { API_KEY: '' } };
-      
+    </script>
+
+    <!-- 2. Tailwind Configuration -->
+    <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -27,18 +31,7 @@
         }
       }
     </script>
-    <!-- IMPORT MAP: Required for this Preview window to load React without a build step -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@18.2.0",
-          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-          "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
-          "lucide-react": "https://esm.sh/lucide-react@0.292.0",
-          "@google/genai": "https://esm.sh/@google/genai"
-        }
-      }
-    </script>
+    
     <style>
       body { font-family: 'Inter', sans-serif; background-color: #09090b; }
       .font-serif { font-family: 'Playfair Display', serif; }
