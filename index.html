@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Pavera Sigue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      // SAFETY POLYFILL: Prevents "process is not defined" crashes in browser environments
+      window.process = { env: { API_KEY: '' } };
+      
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', 'serif'],
+              sans: ['"Inter"', 'sans-serif'],
+            },
+            colors: {
+              gold: {
+                50: '#fbf7eb', 100: '#f5ecce', 200: '#edd89b', 300: '#e4c063', 400: '#dba536',
+                500: '#d48d22', 600: '#b96e1a', 700: '#944f19', 800: '#7a3f1b', 900: '#643419',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- IMPORT MAP: Required for this Preview window to load React without a build step -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+          "lucide-react": "https://esm.sh/lucide-react@0.292.0",
+          "@google/genai": "https://esm.sh/@google/genai"
+        }
+      }
+    </script>
+    <style>
+      body { font-family: 'Inter', sans-serif; background-color: #09090b; }
+      .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+  </head>
+  <body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-gold-500/30">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
